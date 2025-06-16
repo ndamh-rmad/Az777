@@ -1,4 +1,3 @@
-
 import os
 import random
 import asyncio
@@ -56,8 +55,7 @@ async def send_surah(app):
     image = f"https://quran-images-api.vercel.app/surah/{surah_num}"
 
     try:
-        await app.bot.send_message(chat_id=CHANNEL_ID, text=f"📖 سورة {name}
-🎙️ القارئ: {reciter_name}")
+        await app.bot.send_message(chat_id=CHANNEL_ID, text=f"📖 سورة {name}\n🎙️ القارئ: {reciter_name}")
         await app.bot.send_photo(chat_id=CHANNEL_ID, photo=image)
         await app.bot.send_audio(chat_id=CHANNEL_ID, audio=audio, title=name)
         stats["السور"] += 1
@@ -93,19 +91,15 @@ async def start(update, context):
 
 async def help_command(update, context):
     await update.message.reply_text(
-        "/start - بدء التشغيل
-"
-        "/help - الأوامر المتاحة
-"
-        "/stats - عرض الإحصائيات
-"
+        "/start - بدء التشغيل\n"
+        "/help - الأوامر المتاحة\n"
+        "/stats - عرض الإحصائيات\n"
         "/next - متى الإرسال القادم؟"
     )
 
 async def stats_command(update, context):
     report = "\n".join([f"{k}: {v}" for k, v in stats.items()]) or "لا توجد بيانات بعد."
-    await update.message.reply_text(f"📊 الإحصائيات:
-{report}")
+    await update.message.reply_text(f"📊 الإحصائيات:\n{report}")
 
 async def next_command(update, context):
     now = datetime.datetime.now()
